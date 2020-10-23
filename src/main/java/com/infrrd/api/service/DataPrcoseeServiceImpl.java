@@ -12,13 +12,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DataServiceImpl implements DataPrcoseeService, Callable<Map<String, Integer>> {
+public class DataPrcoseeServiceImpl implements DataPrcoseeService, Callable<Map<String, Integer>> {
 
 	private static Map<String, Integer> map = new LinkedHashMap<>();
 	private static Queue<Thread> queue = new LinkedList<>();
 	private static boolean interrupted = false;
 	private ReentrantLock lock = ReentrantLockSingleton.getInstance();
-	Logger logger = LoggerFactory.getLogger(DataServiceImpl.class);
+	Logger logger = LoggerFactory.getLogger(DataPrcoseeServiceImpl.class);
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -32,7 +32,7 @@ public class DataServiceImpl implements DataPrcoseeService, Callable<Map<String,
 			lock.unlock();
 		} else {
 			// executed by 2nd thread which doesn't gets lock.
-			synchronized (DataServiceImpl.class) {
+			synchronized (DataPrcoseeServiceImpl.class) {
 				Thread thread = queue.poll();
 				if (thread != null) {
 					thread.stop();

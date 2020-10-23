@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.infrrd.api.service.DataPrcoseeService;
-import com.infrrd.api.service.DataServiceImpl;
+import com.infrrd.api.service.DataPrcoseeServiceImpl;
 
 @RestController
 @RequestMapping("/api")
@@ -32,7 +32,7 @@ public class ApiController {
 		logger.debug("Start process data request is called..");
 		// Create one thread to handle each request
 		ExecutorService exe = Executors.newSingleThreadExecutor();
-		DataServiceImpl dsi = new DataServiceImpl();
+		DataPrcoseeServiceImpl dsi = new DataPrcoseeServiceImpl();
 		Future<Map<String, Integer>> submit = exe.submit(dsi);
 		try {
 			return submit.get();
